@@ -1,29 +1,38 @@
 import requests
 import time
+import csv
 
-def hit_api(rc_num, headers):
+def get_co_data(rc_num, headers):
 	paylaod = {"searchTerm": rc_num}
 	res = requests.post(url, json = paylaod, headers=headers)
 
 	res_dict = res.json()
-	data = dict()
 
 	data_list = res_dict['data']
 
 	if data_list is None:
 			return f"({x}) RC - {rc_num} No record found!"
 
-	for i in data_list:
-		data['rcNumber'] = i['rcNumber']
-		data['name'] = i['approvedName']
-		data['address'] = i['address']
-		data['status'] = i['companyStatus']
-		data['email'] = i['email']
-		data['registrationDate'] = i['registrationDate']
-		data['classificationId'] = i['classificationId']
-
 	time.sleep(sleep_interval/1000)
-	return data
+	#Returns a list of dictionaries
+	print(data_list)
+	return data_list
+
+def parse_dict_list_to_csv(data, csv_path):
+    # Check the length of the list
+    list_length = len(data)
+    
+    # Preparing to write to CSV
+    if data:
+        keys = data[0].keys()  # Get keys from the first dictionary to use as CSV headers
+        with open(csv_path, 'w', newline='', encoding='utf-8') as output_file:
+            dict_writer = csv.DictWriter(output_file, keys)
+            dict_writer.writeheader()
+            dict_writer.writerows(data)
+    else:
+        print("The list is empty. No CSV file created.")
+
+    return csv_path
 
 sleep_interval = 1950
 
@@ -40,23 +49,18 @@ headers = {
 
 rc_num = 109601
 
+csv_path = '../csv_files/file_2.csv'
+
 #Mapping of classification ID to numbers
-#1 - BN
-#2 - RC
-#3 - IT
+#1 - BN #2 - RC #3 - IT
 
-for x in range(5):
+for x in range(25):
 	try:
-		data = hit_api(rc_num, headers)
-		
-		if data['classificationId'] == 1: data['type'] = 'BN'
-		if data['classificationId'] == 2: data['type'] = 'RC'
-		if data['classificationId'] == 3: data['type'] = 'IT'
+		data = get_co_data(rc_num, headers)
 
-		print(data, '\n')
+		parse_dict_list_to_csv(data, csv_path)
 		rc_num = rc_num + 1
 		
-
 	except requests.exceptions.ConnectionError:
 		print(f"Connection error at iteration {x}; rc{rc_num}. Retrying...")
 		time.sleep(10)

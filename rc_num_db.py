@@ -1,6 +1,7 @@
 import requests
 import time
 import csv
+import os
 
 def get_co_data(rc_num, headers):
 	paylaod = {"searchTerm": rc_num}
@@ -15,7 +16,6 @@ def get_co_data(rc_num, headers):
 
 	time.sleep(sleep_interval/1000)
 	#Returns a list of dictionaries
-	print(data_list)
 	return data_list
 
 def parse_dict_list_to_csv(data, csv_path):
@@ -34,6 +34,27 @@ def parse_dict_list_to_csv(data, csv_path):
 
     return csv_path
 
+def append_dict_list_to_csv(data, csv_path):
+    # Check the length of the list
+    list_length = len(data)
+    
+    # Proceed only if data is not empty
+    if data:
+        keys = data[0].keys()  # Get keys from the first dictionary to use as CSV headers
+        file_exists = os.path.isfile(csv_path)  # Check if the CSV file already exists
+        
+        with open(csv_path, 'a', newline='', encoding='utf-8') as output_file:  # Open file in append mode
+            dict_writer = csv.DictWriter(output_file, keys)
+            
+            if not file_exists:  # Write header only if the file does not exist
+                dict_writer.writeheader()
+                
+            dict_writer.writerows(data)  # Write data rows
+    else:
+        print("The list is empty. No data was appended.")
+
+    return list_length, csv_path
+
 sleep_interval = 1950
 
 url = "https://searchapp.cac.gov.ng/searchapp/api/public-search/company-business-name-it"
@@ -47,18 +68,18 @@ headers = {
     'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0'
     }
 
-rc_num = 109601
+rc_num = 156601
 
-csv_path = '../csv_files/file_2.csv'
+csv_path = '../csv_files/file_3.csv'
 
 #Mapping of classification ID to numbers
 #1 - BN #2 - RC #3 - IT
 
-for x in range(25):
+for x in range(55):
 	try:
 		data = get_co_data(rc_num, headers)
 
-		parse_dict_list_to_csv(data, csv_path)
+		append_dict_list_to_csv(data, csv_path)
 		rc_num = rc_num + 1
 		
 	except requests.exceptions.ConnectionError:

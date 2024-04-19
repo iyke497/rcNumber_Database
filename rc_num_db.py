@@ -89,6 +89,7 @@ for x in range(55):
 
 	except KeyError:
 		print(f'KeyError at iteration{(x)}')
+		continue
 
 	except requests.exceptions.JSONDecodeError:
 			print(f"JSONDecodeError at iteration row {(x)}. Retrying..........")

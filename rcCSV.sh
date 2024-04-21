@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Initialize variables
-start=200000
-stop=200010
+start=200500
+stop=201000
 
 # Infinite loop to keep the script running
 while true; do
@@ -15,9 +15,11 @@ while true; do
     # Check if the Python script executed successfully
     if [ $status -eq 0 ]; then
         echo "Python script executed successfully with start=$start and stop=$stop. Preparing to update variables..."
+        #Send out an email
+        ./send_email.py "$start" "$stop"
         # Update start and stop variables
         start=$stop
-        stop=$((stop + 10))  # Increment stop by 10; adjust this value as needed
+        stop=$((stop + 500))  # Increment stop by 10; adjust this value as needed
 
         # Wait for a brief moment before restarting (optional, can adjust sleep duration)
         sleep 2

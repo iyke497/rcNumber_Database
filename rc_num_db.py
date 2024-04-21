@@ -1,7 +1,9 @@
+#!/Users/iyke/automation/CAC_Info/venv/bin/python3
 import requests
 import time
 import csv
 import os
+import sys
 
 def get_co_data(rc_num, headers):
 	paylaod = {"searchTerm": rc_num}
@@ -68,14 +70,14 @@ headers = {
     'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0'
     }
 
-rc_num = 103000
+rc_num = int(sys.argv[1])
 
-csv_path = './file_103000_105000.csv'
+csv_path = f'./file_{sys.argv[1]}_{sys.argv[2]}.csv'
 
 #Mapping of classification ID to numbers
 #1 - BN #2 - RC #3 - IT
 
-for x in range(2000):
+for x in range(int(sys.argv[2]) - int(sys.argv[1])):
 	try:
 		data = get_co_data(rc_num, headers)
 

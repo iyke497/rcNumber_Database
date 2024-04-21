@@ -1,4 +1,4 @@
-#!/Users/ubuntu/home/rcNumber_Database/venv/bin/python3
+#!/Usr/bin/python3
 import requests
 import datetime
 import time

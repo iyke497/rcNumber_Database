@@ -1,4 +1,4 @@
-#!/Users/iyke/automation/CAC_Info/venv/bin/python3
+#!/Usr/bin/python3
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart

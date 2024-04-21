@@ -68,14 +68,14 @@ headers = {
     'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0'
     }
 
-rc_num = 156601
+rc_num = 103000
 
-csv_path = '../csv_files/file_3.csv'
+csv_path = './file_103000_105000.csv'
 
 #Mapping of classification ID to numbers
 #1 - BN #2 - RC #3 - IT
 
-for x in range(55):
+for x in range(2000):
 	try:
 		data = get_co_data(rc_num, headers)
 

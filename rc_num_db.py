@@ -91,14 +91,16 @@ for x in range(int(sys.argv[2]) - int(sys.argv[1])):
 
 	except KeyError:
 		print(f'KeyError at iteration{(x)}')
+		time.sleep(4)
 		continue
 
 	except requests.exceptions.JSONDecodeError:
-			print(f"JSONDecodeError at iteration row {(x)}. Retrying..........")
-			time.sleep(2)
-			continue
+		print(f"JSONDecodeError at iteration row {(x)}. Retrying..........")
+		time.sleep(4)
+		continue
 
 	except TypeError:
 		print(f"No record found for iteration {(x)}")
+		time.sleep(4)
 		continue
 

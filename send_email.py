@@ -1,4 +1,4 @@
-#!/Usr/bin/python3
+#!/home/ubuntu/rcNumber_Database/venv/bin/python
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart

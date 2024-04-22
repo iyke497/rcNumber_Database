@@ -105,3 +105,7 @@ for x in range(int(sys.argv[2]) - int(sys.argv[1])):
 		time.sleep(4)
 		continue
 
+	except AttributeError as e: 
+		print(f"{e}: For rcNumber:{rc_num}")
+		continue
+

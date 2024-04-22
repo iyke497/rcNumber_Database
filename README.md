@@ -1,4 +1,5 @@
-RC Number DB Generator
+# RC Number DB Generator
+Queries CAC API using RC Numbers to retrieve company information.
 
 This works by running the shell script get_co_rc.sh and passing in 3 arguments
 - The RC number at start of the range

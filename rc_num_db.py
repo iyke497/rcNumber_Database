@@ -73,7 +73,7 @@ headers = {
 
 rc_num = int(sys.argv[1])
 
-csv_path = f'./file_{sys.argv[1]}_{sys.argv[2]}.csv'
+csv_path = f'./csv_files/file_{sys.argv[1]}_{sys.argv[2]}.csv'
 
 #Mapping of classification ID to numbers
 #1 - BN #2 - RC #3 - IT

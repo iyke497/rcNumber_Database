@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Initialize variables
-start=200500
-stop=200510
+start=$1
+stop=$2
 
 # Infinite loop to keep the script running
 while true; do

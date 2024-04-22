@@ -19,7 +19,7 @@ while true; do
         ./send_email.py "$start" "$stop"
         # Update start and stop variables
         start=$stop
-        stop=$((stop + 10))  # Increment stop by 10; adjust this value as needed
+        stop=$((stop + $3))  # Increment stop by 10; adjust this value as needed
 
         # Wait for a brief moment before restarting (optional, can adjust sleep duration)
         sleep 2

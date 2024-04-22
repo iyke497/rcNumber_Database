@@ -1,4 +1,4 @@
-#!/home/ubuntu/rcNumber_Database/venv/bin/python
+#!/usr/bin/env python
 import requests
 import datetime
 import time
